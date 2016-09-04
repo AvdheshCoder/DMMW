@@ -26,7 +26,7 @@
   <link href="https://daks2k3a4ib2z.cloudfront.net/img/favicon.ico" rel="shortcut icon" type="image/x-icon">
   <link href="https://daks2k3a4ib2z.cloudfront.net/img/webclip.png" rel="apple-touch-icon">
 </head>
-<body>
+<body onload="populateData()">
   <div class="section-body section-full-website">
     <div class="header-div-1">
       <div>DMM</div>
@@ -137,15 +137,17 @@
             </div>
             <div class="twitter-follow-bulk-users-div-1">
               <div class="form-wrapper w-form">
-                <form class="follow-bulk-users-form-1" data-name="Email Form" data-redirect="/twitter/follow-bulk-users" id="email-form" method="post" name="email-form">
-                  <label for="job_name">Job Name</label>
+                <!--<form class="follow-bulk-users-form-1" data-name="Email Form" data-redirect="/twitter/follow-bulk-users" id="email-form" method="post" name="email-form">
+     -->             <label for="job_name">Job Name</label>
                   <input autofocus="autofocus" class="text-field-1 w-input" data-name="job_name" id="job_name" maxlength="256" name="job_name" placeholder="enter a job name as per your convenience" required="required" type="text">
                   <label for="csv_file_link-3">CSV File</label>
                   <div class="follow-bulk-users-file-1 w-embed">
-                    <input type='file' name='file' title='yo' id='file'>
+                    <form id="upload-file" method="post" enctype="multipart/form-data">
+                    <input type='file' name='file' title='yo' id='selectFile'>
+                      </form>
                   </div>
                   <input class="button w-button" data-wait="Please wait..." type="button" id ="upload" value="Submit">
-                </form>
+              <!--  </form>-->
                 <div class="w-form-done" id="success">
                   <div>Thank you! Your submission has been received!</div>
                 </div>
@@ -186,7 +188,8 @@
                   <div>Status</div>
                 </div>
               </div>
-              <div class="twitter-follow-bulk-users-row-2 w-row">
+              <div id="populateData"></div>
+             <!-- <div class="twitter-follow-bulk-users-row-2 w-row">
                 <div class="w-col w-col-1">
                   <div>1</div>
                 </div>
@@ -216,96 +219,9 @@
                   <div>In Progress</div>
                 </div>
               </div>
-              <div class="twitter-follow-bulk-users-row-2 w-row">
-                <div class="w-col w-col-1">
-                  <div>1</div>
-                </div>
-                <div class="w-col w-col-4">
-                  <div>Twitter - Japan - Taylor Swift - 01</div>
-                </div>
-                <div class="w-col w-col-1">
-                  <div>07/25/16</div>
-                </div>
-                <div class="w-col w-col-1">
-                  <div>07/30/16</div>
-                </div>
-                <div class="w-col w-col-3">
-                  <div class="w-row">
-                    <div class="w-col w-col-4">
-                      <div>5000</div>
-                    </div>
-                    <div class="w-col w-col-4">
-                      <div>200</div>
-                    </div>
-                    <div class="w-col w-col-4">
-                      <div>5200</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="w-col w-col-2">
-                  <div>In Progress</div>
-                </div>
-              </div>
-              <div class="twitter-follow-bulk-users-row-2 w-row">
-                <div class="w-col w-col-1">
-                  <div>1</div>
-                </div>
-                <div class="w-col w-col-4">
-                  <div>Twitter - Japan - Taylor Swift - 01</div>
-                </div>
-                <div class="w-col w-col-1">
-                  <div>07/25/16</div>
-                </div>
-                <div class="w-col w-col-1">
-                  <div>07/30/16</div>
-                </div>
-                <div class="w-col w-col-3">
-                  <div class="w-row">
-                    <div class="w-col w-col-4">
-                      <div>5000</div>
-                    </div>
-                    <div class="w-col w-col-4">
-                      <div>200</div>
-                    </div>
-                    <div class="w-col w-col-4">
-                      <div>5200</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="w-col w-col-2">
-                  <div>In Progress</div>
-                </div>
-              </div>
-              <div class="twitter-follow-bulk-users-row-2 w-row">
-                <div class="w-col w-col-1">
-                  <div>1</div>
-                </div>
-                <div class="w-col w-col-4">
-                  <div>Twitter - Japan - Taylor Swift - 01</div>
-                </div>
-                <div class="w-col w-col-1">
-                  <div>07/25/16</div>
-                </div>
-                <div class="w-col w-col-1">
-                  <div>07/30/16</div>
-                </div>
-                <div class="w-col w-col-3">
-                  <div class="w-row">
-                    <div class="w-col w-col-4">
-                      <div>5000</div>
-                    </div>
-                    <div class="w-col w-col-4">
-                      <div>200</div>
-                    </div>
-                    <div class="w-col w-col-4">
-                      <div>5200</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="w-col w-col-2">
-                  <div>In Progress</div>
-                </div>
-              </div>
+-->
+
+
             </div>
           </div>
         </div>

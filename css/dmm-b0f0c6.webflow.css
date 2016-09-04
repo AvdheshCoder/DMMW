@@ -368,6 +368,8 @@ p {
   margin-top: 25px;
   padding-top: 10px;
   padding-bottom: 10px;
+  overflow: auto;
+  height:200px;
 }
 
 .twitter-follow-bulk-users-row-1 {

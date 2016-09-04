@@ -1,11 +1,11 @@
-var upload_url="http://localhost:5000/twitter/csv/upload"; // for dev
-//var upload_url="http://dataminingmedia.com:5050/auth/token/get"; // for server
-
+//var upload_url="http://localhost:5000/follow/bulk/csv"; // for dev
+//var populate_data="http://localhost:5000/follow/bulk";// for dev
+var upload_url="http://dataminingmedia.com:5050/follow/bulk/csv"; // for server
+var populate_data="http://dataminingmedia.com:5050/follow/bulk";
 
 $(document).ready(function() {
   $("#upload").click(function(){
-        var form_data = new FormData();
-form_data.append("file",document.getElementById("file").value);
+        var form_data = new FormData($('#upload-file')[0]);
 form_data.append("job_name",document.getElementById("job_name").value);
         $.ajax({
             type: 'POST',
@@ -16,15 +16,49 @@ form_data.append("job_name",document.getElementById("job_name").value);
             processData: false,
             async: false,
             success: function(data) {
-            	if (data.trim()== "FILE_SAVED") {
-                	document.getElementById('file').value="";
+            	if (data.substring(0,1)== "#") {
+            	        alert(data);
+                		hideSpan('success');
+					    showSpan('fail');
+
+				}
+				else {
+                    document.getElementById('selectFile').value="";
+                	document.getElementById('job_name').value="";
 					showSpan('success');
 					hideSpan('fail');
+                    var dataToPopulate="";
+                    var obj = JSON.parse(data);
 
-				} else {
+                   for(var i=0;i<obj.length;i++)
+                   {
 
-					hideSpan('success');
-					showSpan('fail');
+                   dataToPopulate=dataToPopulate+"<div class='twitter-follow-bulk-users-row-2 w-row'><div class='w-col w-col-1'>"
+                  +"<div>"+(i+1)+"</div>"
+                +"</div>"
+                +"<div class='w-col w-col-4'>"
+                  +"<div>"+obj[i].jobName+"</div>"
+                +"</div>"
+                +"<div class='w-col w-col-1'>"
+                  +"<div>"+obj[i].created_on+"</div>"
+                +"</div>"
+                +"<div class='w-col w-col-1'>"
+                 +" <div>"+obj[i].updated_on+"</div>"
+                +"</div>"
+                +"<div class='w-col w-col-3'>"
+                 +" <div class='w-row'>"
+                    +"<div class='w-col w-col-4'>"
+                   +"   <div>"+obj[i].completed+"</div>"
+                   +" </div>"
+                  +"  <div class='w-col w-col-4'>"
+                    +"  <div>"+obj[i].failed+"</div>"
+                    +"</div>"
+                   +" <div class='w-col w-col-4'><div>"+obj[i].entries+"</div></div></div></div><div class='w-col w-col-2'><div>"+obj[i].status+"</div></div></div>";
+                   }
+
+  document.getElementById('populateData').innerHTML=dataToPopulate;
+
+
 				}
             },
         });
@@ -55,3 +89,56 @@ function showSpan(field) {
 	hideSpanArea.style.display = "block";
 
 }
+
+
+function populateData(){
+
+
+            var form_data = new FormData();
+            $.ajax({
+                crossOrigin: true,
+                type: 'POST',
+                url: populate_data,
+                data: form_data,
+                contentType: false,
+                cache: false,
+                processData: false,
+                async: false,
+                success: function(data) {
+
+                    var dataToPopulate="";
+                    var obj = JSON.parse(data);
+
+                   for(var i=0;i<obj.length;i++)
+                   {
+                   dataToPopulate=dataToPopulate+"<div class='twitter-follow-bulk-users-row-2 w-row'><div class='w-col w-col-1'>"
+                  +"<div>"+(i+1)+"</div>"
+                +"</div>"
+                +"<div class='w-col w-col-4'>"
+                  +"<div>"+obj[i].jobName+"</div>"
+                +"</div>"
+                +"<div class='w-col w-col-1'>"
+                  +"<div>"+obj[i].created_on+"</div>"
+                +"</div>"
+                +"<div class='w-col w-col-1'>"
+                 +" <div>"+obj[i].updated_on+"</div>"
+                +"</div>"
+                +"<div class='w-col w-col-3'>"
+                 +" <div class='w-row'>"
+                    +"<div class='w-col w-col-4'>"
+                   +"   <div>"+obj[i].completed+"</div>"
+                   +" </div>"
+                  +"  <div class='w-col w-col-4'>"
+                    +"  <div>"+obj[i].failed+"</div>"
+                    +"</div>"
+                   +" <div class='w-col w-col-4'><div>"+obj[i].entries+"</div></div></div></div><div class='w-col w-col-2'><div>"+obj[i].status+"</div></div></div>";
+                   }
+
+                document.getElementById('populateData').innerHTML=dataToPopulate;
+
+
+
+
+                },
+            });
+    }
